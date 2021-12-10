@@ -80,6 +80,7 @@ for f in *; do
             --exclude='**/node_modules'\
             --exclude='**/htmlcov'\
             --exclude='**/staticfiles'\
+            --exclude='**/.cache'\
             --exclude='**/.pytest_cache'\
             --exclude='**/__pycache__'\
             --exclude='.tox'\
