@@ -48,7 +48,10 @@
 
 ## 0. Let's read from the configuration file & define some variables
 
-configfile='config.toml'
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SCRIPT=$(basename "$0")
+
+configfile="${SCRIPT_DIR}/config.toml"
 
 machine=$( tomlq -r .core.machine_name "$configfile" )
 user=$( tomlq -r .core.user "$configfile" )
@@ -61,9 +64,6 @@ config_dir=$( tomlq -r .subfolders.settings "$configfile" )
 
 remote=$( tomlq -r .rclone.remote "$configfile" )
 extras=$( tomlq -r .extra "$configfile" | jq -c '.[]' )
-
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-SCRIPT=$(basename "$0")
 
 timestamp=$(date '+%Y%m%d_%H%M%S')
 
