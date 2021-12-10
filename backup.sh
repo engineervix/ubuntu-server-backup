@@ -121,7 +121,7 @@ rdiff-backup --preserve-numerical-ids --no-file-statistics /var/lib/redis "${bac
 
 ### packages
 mkdir -p "${backup_dir}/${config_dir}"/packages/
-apt-clone clone "${backup_dir}/${config_dir}"/packages/
+apt-clone clone --with-dpkg-repack "${backup_dir}/${config_dir}"/packages/
 snap list > "${backup_dir}/${config_dir}"/packages/snap_list.txt
 pip3 freeze > "${backup_dir}/${config_dir}"/packages/system_Py3_installed_packages.txt
 npm list -g --depth 0 > "${backup_dir}/${config_dir}"/packages/npm_global_installed_packages.txt
