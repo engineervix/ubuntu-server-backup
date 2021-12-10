@@ -39,7 +39,7 @@ This is a custom backup script to automate the process of backing up databases, 
   - all PostgreSQL databases
   - redis data & configuration
   - list of installed `apt` and `snap` packages
-  - list of globally installed `python3` and `python2` packages
+  - list of globally installed `python3` packages
   - list of globally installed npm packages
   - all your Python virtual environments (names + installed packages for each)
   - your `.bashrc`, `.zshrc` and `.vimrc.after` files
