@@ -62,8 +62,11 @@ This is a custom backup script to automate the process of backing up databases, 
 ```bash
 wget https://github.com/engineervix/ubuntu-server-backup/raw/main/backup.sh && \
 wget https://github.com/engineervix/ubuntu-server-backup/raw/main/config.sample.toml && \
-mv -v config.sample.toml config.toml
+mv -v config.sample.toml config.toml && \
+chmod +x backup.sh
 ```
+
+⌨️ As you can see in the last line above, we just have to ensure that the script is executable.
 
 ⌨️ Now, edit your `config.toml` accordingly.
 
