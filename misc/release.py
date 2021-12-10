@@ -141,6 +141,8 @@ def release(args=None):
 
     args = parser.parse_args(args)
 
+    init()
+
     if args.operation in ["bump", "notes"]:
         if args.operation == "bump":
             execute_bump_hack()
