@@ -1,0 +1,24 @@
+# configuration file for the backup script
+
+[core]
+machine_name = "django_machine"        # for your own reference
+user = "user"                          # valid Unix user on your server
+projects_dir = "/home/user/projects"   # full path, no trailing `/`
+backup_dir = "/home/user/mybackups"    # full path, no trailing `/`
+
+[subfolders]
+# these are names of the subfolders in the `backup_dir`
+# again, no trailing slash
+files = "apps"       # where the files for each project are backed up to
+databases = "DBs"    # where your databases are backed up to
+settings = "config"  # this is where configurations/settings are backed up to
+
+[rclone]
+# the name of your rclone remote (see <https://rclone.org/remote_setup/>)
+remote = "remote"
+
+[extra]
+# additional directories you wanna backup
+# simply comment out anything below this line if you don't have anything extra to backup
+downloads = "/home/user/Downloads"      # full path, no trailing `/`
+experiments = "/home/user/Experiments"  # full path, no trailing `/`
