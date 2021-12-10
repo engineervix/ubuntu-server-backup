@@ -10,15 +10,16 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Introduction](#introduction)
-- [Features ✨](#features-)
-- [Usage 🚀](#usage-)
-- [Supported Ubuntu versions](#supported-ubuntu-versions)
-- [TODO ✅](#todo-)
-- [Author](#author)
-- [Contributing 🤝](#contributing-)
-- [Show your support](#show-your-support)
-- [License 📝](#license-)
+- [Bash backup script for Ubuntu servers](#bash-backup-script-for-ubuntu-servers)
+  - [Introduction](#introduction)
+  - [Features ✨](#features-)
+  - [Usage 🚀](#usage-)
+  - [Supported Ubuntu versions](#supported-ubuntu-versions)
+  - [TODO ✅](#todo-)
+  - [Author](#author)
+  - [Contributing 🤝](#contributing-)
+  - [Show your support](#show-your-support)
+  - [License 📝](#license-)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -59,8 +60,8 @@ This is a custom backup script to automate the process of backing up databases, 
 ⌨️ The backup script (`backup.sh`) reads from a configuration file, `config.toml`. To get started, you can either clone this repo or just download `backup.sh` and `config.sample.toml`. Here's an example of the latter:
 
 ```bash
-wget https://github.com/engineervix/ubuntu-server-backup/blob/main/backup.sh && \
-wget https://github.com/engineervix/ubuntu-server-backup/blob/main/config.sample.toml && \
+wget https://github.com/engineervix/ubuntu-server-backup/raw/main/backup.sh && \
+wget https://github.com/engineervix/ubuntu-server-backup/raw/main/config.sample.toml && \
 mv -v config.sample.toml config.toml
 ```
 
