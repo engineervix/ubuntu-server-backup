@@ -1,7 +1,7 @@
 # Bash backup script for Ubuntu servers
 
 [![Continuous Integration](https://github.com/engineervix/ubuntu-server-backup/actions/workflows/main.yml/badge.svg)](https://github.com/engineervix/ubuntu-server-backup/actions/workflows/main.yml)
-[![last commit](https://badgen.net/github/last-commit/engineervix//ubuntu-server-backup)](https://github.com/engineervix/ubuntu-server-backup/commits/)
+![GitHub last commit](https://img.shields.io/github/last-commit/engineervix/ubuntu-server-backup)
 ![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/engineervix/ubuntu-server-backup/latest/main)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ![License](https://img.shields.io/github/license/engineervix/ubuntu-server-backup)
