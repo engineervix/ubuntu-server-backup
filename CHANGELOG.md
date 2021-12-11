@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### 🚀 Features
 
-* **specify-`days`-in-`config.toml`-&-compress-each-directory-in-the-`[extra]`-section:** also add a bunch of TODOs! ([077eb30](https://github.com/engineervix/ubuntu-server-backup/commit/077eb30965fe2c1309a9610bec6d3aa11f6963ca))
+* specify `days` in `config.toml` & compress each directory in the `[extra]` section ([e68bde2](https://github.com/engineervix/ubuntu-server-backup/commit/e68bde2071a0755b379b14723381fddfe69c8431))
 
 ## [v0.2.0](https://github.com/engineervix/ubuntu-server-backup/compare/v0.1.1...v0.2.0) (2021-12-11)
 
