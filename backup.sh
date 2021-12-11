@@ -48,10 +48,25 @@
 
 ## 0. Let's read from the configuration file & define some variables
 
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SCRIPT_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )"
 SCRIPT=$(basename "$0")
 
 configfile="${SCRIPT_DIR}/config.toml"
+
+# the tomlq binary is installed in this location
+export PATH=$PATH:/usr/local/bin/
+
+if ! command -v tomlq &> /dev/null
+then
+    echo "tomlq could not be found. Check by running <(sudo -H) pip3 install yq>"
+    exit
+fi
+
+if ! command -v jq &> /dev/null
+then
+    echo "jq could not be found. Check by running <(sudo) apt install jq>"
+    exit
+fi
 
 machine=$( tomlq -r .core.machine_name "$configfile" )
 user=$( tomlq -r .core.user "$configfile" )
@@ -138,11 +153,12 @@ lsvirtualenv > "${backup_dir}/${config_dir}"/venv/venv_list.txt
 
 grep "^[^=\ ]" < "${backup_dir}/${config_dir}"/venv/venv_list.txt | while IFS= read -r venv
 do
-  workon "${venv}"
-  pyversion=$(python --version | awk '{print $1$2}' | sed 's/\.//g')
+  # workon "${venv}"
+  pybinary=/home/"${user}"/Env/"${venv}"/bin/python
+  pyversion=$("${pybinary}" --version | awk '{print $1$2}' | sed 's/\.//g')
   # pyversion=$(echo -e "import sys\nprint('Python'+str(sys.version_info.major)+str(sys.version_info.minor)+str(sys.version_info.micro))" | python)
-  /home/"${user}"/Env/"${venv}"/bin/python -m pip freeze > "${backup_dir}/${config_dir}/requirements_${venv}_${pyversion}".txt
-  deactivate
+  "${pybinary}" -m pip freeze > "${backup_dir}/${config_dir}/venv/requirements_${venv}_${pyversion}".txt
+  # deactivate
 done
 
 ### dotfiles
@@ -205,13 +221,13 @@ cd $tmp_location || exit
 umask 177
 
 ##### Compress the backup into a tar file
-tar -cvzf "${tmp_location}${backup_name}".tar.gz "${backup_name}"
+tar -cvzf "${tmp_location}${backup_name}.tar.gz" "${backup_name}"
 
 ##### Create the backup location, if it doesn't already exist
 mkdir -p "${backup_to}"
 
 ##### Move the tar.gz file to the backup location
-mv "${tmp_location}${backup_name}".tar.gz "${backup_to}"
+mv "${tmp_location}${backup_name}.tar.gz" "${backup_to}"
 
 ##### Delete the old directory from the temporary folder
 rm -rf "${tmp_location}${backup_name}"
@@ -231,8 +247,9 @@ rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${ba
 rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${backup_dir}/${db_dir}/" "${remote}:${machine}/${db_dir}/"
 rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${backup_dir}/${config_dir}/" "${remote}:${machine}/${config_dir}/"
 
-### then, the backup file itself!
+### then, the backup file + accompanying config
 rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${SCRIPT_DIR}/${SCRIPT}" "${remote}":"${machine}"
+rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${configfile}" "${remote}":"${machine}"
 
 ### finally, any additional stuff
 
@@ -251,8 +268,9 @@ fi
 ### delete backups older than 10 days
 find "${backup_dir}/${files_dir}/" -mtime +$days -type f -delete
 find "${backup_dir}/${db_dir}/" -mtime +$days -type f -delete
+find "${backup_dir}/" -mtime +$days -type f -name "backup_*.log" -delete
 
-rm -rv "${backup_dir}/${config_dir:?}"/*
+rm -rv "${backup_dir:?}/${config_dir:?}"
 
-## cron example (run daily at 3:18AM)
-# 18 3 * * * /path/to/backup.sh
+## cron example (run daily at 3:18AM), with redirection of output to timestamped logfile
+# 18 3 * * * /path/to/backup.sh >> /path/to/backup_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1
