@@ -10,16 +10,15 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Bash backup script for Ubuntu servers](#bash-backup-script-for-ubuntu-servers)
-  - [Introduction](#introduction)
-  - [Features ✨](#features-)
-  - [Usage 🚀](#usage-)
-  - [Supported Ubuntu versions](#supported-ubuntu-versions)
-  - [TODO ✅](#todo-)
-  - [Author](#author)
-  - [Contributing 🤝](#contributing-)
-  - [Show your support](#show-your-support)
-  - [License 📝](#license-)
+- [Introduction](#introduction)
+- [Features ✨](#features-)
+- [Usage 🚀](#usage-)
+- [Supported Ubuntu versions](#supported-ubuntu-versions)
+- [TODO ✅](#todo-)
+- [Author](#author)
+- [Contributing 🤝](#contributing-)
+- [Show your support](#show-your-support)
+- [License 📝](#license-)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
