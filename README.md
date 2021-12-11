@@ -1,6 +1,6 @@
 # Bash backup script for Ubuntu servers
 
-[![Continuous Integration](https://github.com/engineervix/ubuntu-server-backup/actions/workflows/main.yml/badge.svg)](https://github.com/engineervix/ubuntu-server-backup/actions/workflows/main.yml)
+[![ShellCheck](https://github.com/engineervix/ubuntu-server-backup/actions/workflows/main.yml/badge.svg)](https://github.com/engineervix/ubuntu-server-backup/actions/workflows/main.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/engineervix/ubuntu-server-backup)
 ![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/engineervix/ubuntu-server-backup/latest/main)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
@@ -65,7 +65,7 @@ mv -v config.sample.toml config.toml && \
 chmod +x backup.sh
 ```
 
-⌨️ As you can see in the last line above, we just have to ensure that the script is executable.
+⌨️ As you can see in the last line above, we are ensuring that the script is executable (just in case).
 
 ⌨️ Now, edit your `config.toml` accordingly.
 
@@ -77,7 +77,7 @@ chmod +x backup.sh
 
 ## Supported Ubuntu versions
 
-This has been tested on Ubuntu 20.04, I don't know if it'll work correctly on other versions.
+This has been **tested on Ubuntu 20.04**, I don't know if it'll work correctly on other versions.
 
 ## TODO ✅
 

@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: ShellCheck
 
 env:
   TERM: screen-256color
@@ -15,10 +15,8 @@ on:
       - "v*"
 
 jobs:
-
   # Runs all steps on the VM
   shellcheck:
-
     runs-on: ubuntu-20.04
 
     steps:
@@ -41,7 +39,6 @@ jobs:
   # Runs all steps on the VM
   # Creates a GitHub Release when the shellcheck job succeeds, and only on pushes to tags.
   release:
-
     needs: shellcheck
 
     if: needs.shellcheck.result == 'success' && startsWith( github.ref, 'refs/tags/v' )
