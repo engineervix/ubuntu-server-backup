@@ -94,7 +94,7 @@ This has been **tested on Ubuntu 20.04**, I don't know if it'll work correctly o
 - [ ] Include other *dotfiles* (such as `~/.profile`, etc.)
 - [ ] add email/SMS/telegram/slack notifications on failure (actually, just use <https://healthchecks.io/>)
 - [ ] split each backup task into a standalone function
-- [ ] run automated tests
+- [ ] run automated tests using [Bash Automated Testing System](https://github.com/bats-core/bats-core)
 
 ## Author
 
