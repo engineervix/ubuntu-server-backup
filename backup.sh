@@ -72,6 +72,7 @@ machine=$( tomlq -r .core.machine_name "$configfile" )
 user=$( tomlq -r .core.user "$configfile" )
 projects_dir=$( tomlq -r .core.projects_dir "$configfile" )
 backup_dir=$( tomlq -r .core.backup_dir "$configfile" )
+days=$( tomlq -r .core.days "$configfile" )
 
 files_dir=$( tomlq -r .subfolders.files "$configfile" )
 db_dir=$( tomlq -r .subfolders.databases "$configfile" )
@@ -81,9 +82,6 @@ remote=$( tomlq -r .rclone.remote "$configfile" )
 extras=$( tomlq -r .extra "$configfile" | jq -c '.[]' )
 
 timestamp=$(date '+%Y%m%d_%H%M%S')
-
-### The number of days to keep backup files before deleting them
-days="10"
 
 ## 01. backup the files:
 
@@ -266,19 +264,40 @@ if [ -z "$extras" ]
 then
   echo "looks like there's no other stuff to backup"
 else
-  for extra in $extras; 
+  for extra in $extras;
   do
-    rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${extra}/" "${remote}":"${machine}"/additional_backups/
+    extra=$(echo -e "${extra}" | sed 's/^.\(.*\).$/\1/')  # strip the 1st & last chars
+    directory=$( basename "${extra}" )
+    mkdir -p "${backup_dir}/additional_backups/${directory}"
+    tar --exclude='**/.git'\
+        --exclude='**/node_modules'\
+        --exclude='**/htmlcov'\
+        --exclude='**/staticfiles'\
+        --exclude='**/.cache'\
+        --exclude='**/.pytest_cache'\
+        --exclude='**/__pycache__'\
+        --exclude='.tox'\
+        --exclude='.coverage'\
+        --exclude='.coverage.xml'\
+        --exclude='*.pyc'\
+        --exclude='*.pyo'\
+        --exclude='*~'\
+        -cv "${extra}" | xz -3e > "${backup_dir}/additional_backups/${directory}/${directory}_${timestamp}".tar.xz    
   done
+  rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${backup_dir}/additional_backups/" "${remote}":"${machine}"/additional_backups/
 fi
 
 ## 05. cleanup
 
 ### delete backups older than 10 days
-find "${backup_dir}/${files_dir}/" -mtime +$days -type f -delete
-find "${backup_dir}/${db_dir}/" -mtime +$days -type f -delete
-find "${backup_dir}/" -mtime +$days -type f -name "backup_*.log" -delete
+find "${backup_dir}/${files_dir}/" -mtime +"${days}" -type f -delete
+find "${backup_dir}/${db_dir}/" -mtime +"${days}" -type f -delete
+find "${backup_dir}/additional_backups/" -mtime +"${days}" -type f -delete
 
+### delete backup logs older than specified No. of days
+find "${backup_dir}" -mtime +"${days}" -type f -name "backup_*.log" -delete
+
+### delete the configs directory
 rm -rv "${backup_dir:?}/${config_dir:?}"
 
 ## cron example (run daily at 3:18AM), with redirection of output to timestamped logfile

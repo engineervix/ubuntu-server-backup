@@ -40,7 +40,7 @@ This is a custom backup script to automate the process of backing up databases, 
 - uses [rclone](https://rclone.org/) to sync your backups to a cloud provider of your choice
 - run the script via **cron**
 - timestamps your backups
-- automatically deletes backups older than 10 days (of course you can change this to whatever number of days you want)
+- automatically deletes backups older than the number of days you specify in `config.toml`
 - backs up the following:
   - all your project files
   - all PostgreSQL databases
@@ -90,6 +90,9 @@ This has been **tested on Ubuntu 20.04**, I don't know if it'll work correctly o
 ## TODO ✅
 
 - [X] Include celery configurations
+- [ ] Fix potential bug in the `[extra]` section of [`config.sample.toml`](config.sample.toml), which could arise in a situation where you have more than one path with the same `basename`.
+- [ ] Allow for files (instead of just folders) in the `[extra]` section of [`config.sample.toml`](config.sample.toml)
+- [ ] Allow for extra ignore patterns in the `tar` command
 - [ ] do *incremental* backups using [duplicity](https://duplicity.gitlab.io/duplicity-web/index.html)
 - [ ] Backup any additional custom Python virtual environment configs (virtualenvwrapper)
 - [ ] Include other *dotfiles* (such as `~/.profile`, etc.)

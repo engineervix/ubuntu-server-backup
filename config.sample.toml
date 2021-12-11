@@ -5,6 +5,7 @@ machine_name = "django_machine"        # for your own reference
 user = "user"                          # valid Unix user on your server
 projects_dir = "/home/user/projects"   # full path, no trailing `/`
 backup_dir = "/home/user/mybackups"    # full path, no trailing `/`
+days = 10                              # No. of days to keep backup files before deleting them
 
 [subfolders]
 # these are names of the subfolders in the `backup_dir`
