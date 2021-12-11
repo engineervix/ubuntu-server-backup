@@ -89,7 +89,7 @@ This has been **tested on Ubuntu 20.04**, I don't know if it'll work correctly o
 
 ## TODO ✅
 
-- [ ] Include celery configurations
+- [X] Include celery configurations
 - [ ] do *incremental* backups using [duplicity](https://duplicity.gitlab.io/duplicity-web/index.html)
 - [ ] Backup any additional custom Python virtual environment configs (virtualenvwrapper)
 - [ ] Include other *dotfiles* (such as `~/.profile`, etc.)

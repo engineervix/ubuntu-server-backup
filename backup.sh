@@ -161,6 +161,15 @@ do
   # deactivate
 done
 
+### Celery
+if [ -z "$(ls -A /etc/conf.d/)" ]; then
+   echo "Looks like there's no celery project on this machine"
+else
+    mkdir -p "${backup_dir}/${config_dir}"/celery/{conf.d,systemd}
+    cp -v /etc/conf.d/* "${backup_dir}/${config_dir}/celery/conf.d/"
+    cp -v /etc/systemd/system/celery* "${backup_dir}/${config_dir}/celery/systemd/"
+fi
+
 ### dotfiles
 cp -v /home/"${user}"/.bashrc "${backup_dir}/${config_dir}"/dotfiles/_bashrc
 cp -v /home/"${user}"/.zshrc "${backup_dir}/${config_dir}"/dotfiles/_zshrc
