@@ -70,11 +70,15 @@ chmod +x backup.sh
 
 ⌨️ Now, edit your `config.toml` accordingly.
 
-⌨️ You can run this script manually (`./backup.sh` if you're in the same directory, or `/path/to/backup.sh` if calling the script from somewhere else), but you probably wanna run it via `cron`, as `root`. For example, to run it at 3:18AM everyday, your crontab entry will look like: `18 3 * * * /path/to/backup.sh`
+⌨️ You can run this script manually (`./backup.sh` if you're in the same directory, or `/path/to/backup.sh` if calling the script from somewhere else), but you probably wanna run it via `cron`, as `root`. For example, to run it at 3:18AM everyday, your crontab entry will look like: `18 3 * * * /path/to/backup.sh`. Here's another example, with redirection of output to timestamped log file.
+
+```bash
+# 18 3 * * * /path/to/backup.sh >> /path/to/backup_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1
+```
 
 ## Supported Ubuntu versions
 
-I had Ubuntu 20.04 in mind when writing this, so I don't know if it'll work correctly on other versions.
+This has been tested on Ubuntu 20.04, I don't know if it'll work correctly on other versions.
 
 ## TODO ✅
 
