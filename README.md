@@ -5,15 +5,17 @@
 ![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/engineervix/ubuntu-server-backup/latest/main)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ![License](https://img.shields.io/github/license/engineervix/ubuntu-server-backup)
+[![works badge](https://cdn.jsdelivr.net/gh/nikku/works-on-my-machine@v0.2.0/badge.svg)](https://github.com/nikku/works-on-my-machine)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Introduction](#introduction)
+  - [Important ⚠️](#important-)
 - [Features ✨](#features-)
 - [Usage 🚀](#usage-)
-- [Supported Ubuntu versions](#supported-ubuntu-versions)
+- [Supported Ubuntu versions 🖥️](#supported-ubuntu-versions-)
 - [TODO ✅](#todo-)
 - [Author](#author)
 - [Contributing 🤝](#contributing-)
@@ -25,6 +27,12 @@
 ## Introduction
 
 This is a custom backup script to automate the process of backing up databases, files, configurations, etc. for **web applications** running on an Ubuntu server. These applications are typically Python projects (Django, Flask, etc.), and the server setup is based on [@engineervix/ubuntu-server-setup](https://github.com/engineervix/ubuntu-server-setup).
+
+### Important ⚠️
+
+1. This script is NOT a comprehensive backup solution, **it's certainly not the one backup solution to rule them all**, and it doesn't backup your entire server. If you want a more comprehensive backup solution, then you might wanna consider solutions like [Bacula](https://www.bacula.org/). I'd also recommend that you check out the Ubuntu Community Help Wiki, there's [a section on backing up your system](https://help.ubuntu.com/community/BackupYourSystem).
+2. This script is NOT meant to replace other backup regimes that you may have, but rather, to complement them. Most cloud server providers (Digital Ocean, Linode, Hetzner, AWS, Vultr, etc.) have **automatic backups** (typically ≤20% of server cost) and **snapshots** (a couple of cents per GB per month). I highly recommend that you enable such services, your future self will thank you!
+3. This script was put together as a "quick hack" to address the particular need mentioned in the opening paragraph of this introductory section. It is not perfect, but "[_it works on my machine(s)_](https://www.kevinwanke.com/why-you-should-never-use-the-phrase-but-it-works-on-my-machine/)"! While I've taken great care to ensure things work, I may not have accounted for every edge case, so use it with caution. Test it on a temporary server first, and make necessary modifications to suit your situation. If your modifications could benefit the community, then please be a good netizen and [send a PR](https://github.com/engineervix/ubuntu-server-backup/pulls)!
 
 ## Features ✨
 
@@ -75,15 +83,15 @@ chmod +x backup.sh
 # 18 3 * * * /path/to/backup.sh >> /path/to/backup_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1
 ```
 
-## Supported Ubuntu versions
+## Supported Ubuntu versions 🖥️
 
 This has been **tested on Ubuntu 20.04**, I don't know if it'll work correctly on other versions.
 
 ## TODO ✅
 
-- [ ] do *incremental* backups using <https://duplicity.gitlab.io/duplicity-web/index.html>
+- [ ] do *incremental* backups using [duplicity](https://duplicity.gitlab.io/duplicity-web/index.html)
 - [ ] Backup any additional custom Python virtual environment configs (virtualenvwrapper)
-- [ ] Include other *dotfiles* (such as `.profile`, etc.)
+- [ ] Include other *dotfiles* (such as `~/.profile`, etc.)
 - [ ] add email/SMS/telegram/slack notifications on failure (actually, just use <https://healthchecks.io/>)
 - [ ] split each backup task into a standalone function
 - [ ] run automated tests
