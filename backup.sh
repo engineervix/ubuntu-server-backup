@@ -4,7 +4,7 @@
 # description:  backups up *important stuff* on an Ubuntu server (tested on 20.04)
 # author:       Victor Miti <https://github.com/engineervix>
 # url:          <https://github.com/engineervix/ubuntu-server-backup>
-# version:      0.1.1
+# version:      0.2.0
 # license:      MIT
 #
 # What's this *important stuff*?

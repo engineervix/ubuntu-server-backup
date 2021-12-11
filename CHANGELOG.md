@@ -4,6 +4,25 @@ All notable changes to this project will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project attempts to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.0](https://github.com/engineervix/ubuntu-server-backup/compare/v0.1.1...v0.2.0) (2021-12-11)
+
+
+### 👷 CI/CD
+
+* change name to *ShellCheck*, instead of *Continuous Integration* ([cacac6e](https://github.com/engineervix/ubuntu-server-backup/commit/cacac6ee36d745260c0089f8f6a92b1b42b0e860))
+
+
+### 📝 Docs
+
+* add backing up celery configurations to the TODO list ([6e357d1](https://github.com/engineervix/ubuntu-server-backup/commit/6e357d1cafc9a6997cc4f3d2704b90ddcd07e7ba))
+* add important notice and recommendations ([5d8e588](https://github.com/engineervix/ubuntu-server-backup/commit/5d8e588538ae6447459288f276001c23480be7fa))
+* mention the need to test using BATS ([cd82888](https://github.com/engineervix/ubuntu-server-backup/commit/cd82888aa7a236d7e76774e76c5329e127c30cac))
+
+
+### 🚀 Features
+
+* backup celery configs if they exist ([f157f7f](https://github.com/engineervix/ubuntu-server-backup/commit/f157f7f4be351ed932978477c4c2cee894a00347))
+
 ## [v0.1.1](https://github.com/engineervix/ubuntu-server-backup/compare/v0.1.0...v0.1.1) (2021-12-11)
 
 
