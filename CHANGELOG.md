@@ -4,6 +4,28 @@ All notable changes to this project will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project attempts to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.1](https://github.com/engineervix/ubuntu-server-backup/compare/v0.1.0...v0.1.1) (2021-12-11)
+
+
+### ♻️ Code Refactoring
+
+* add `--with-dpkg-repack` option to `apt-clone` command ([c8b51b5](https://github.com/engineervix/ubuntu-server-backup/commit/c8b51b580048c3c0c04d972888542d30c343dd28))
+
+
+### 📝 Docs
+
+* provide more details on cron setup, and confirm testing on Ubuntu 20.04 ([dcd0087](https://github.com/engineervix/ubuntu-server-backup/commit/dcd00872e1f3a6813961f0d46ee37edf1bed4d43))
+* **readme:** ensure that the script is executable ([b18f5be](https://github.com/engineervix/ubuntu-server-backup/commit/b18f5beb59b3fae76db799997c8afed2e2bdcdd7))
+
+
+### 🐛 Bug Fixes
+
+* critical bug which can result in losing everything on your server ([5580ae5](https://github.com/engineervix/ubuntu-server-backup/commit/5580ae5fba4c5bce8db033fe772c6d23edc10ef9))
+* exclude `.cache/` folders in backups ([8a82f4e](https://github.com/engineervix/ubuntu-server-backup/commit/8a82f4e5b023cdfbb269bd280a39eccacac795bd))
+* **readme:** download paths ([2aa3456](https://github.com/engineervix/ubuntu-server-backup/commit/2aa3456065050beb3278a027be16f3a06783acda))
+* remove python2-related backups since py2 reached EOL ([0c37da7](https://github.com/engineervix/ubuntu-server-backup/commit/0c37da7451224cb18040194cfd56deff751f29a1))
+* use absolute path to config file ([bfc82e9](https://github.com/engineervix/ubuntu-server-backup/commit/bfc82e9010368d3de52589c0bc3167ad2262b001))
+
 ## [v0.1.0](https://github.com/engineervix/ubuntu-server-backup/compare/v0.0.0...v0.1.0) (2021-12-10)
 
 
