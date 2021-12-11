@@ -4,6 +4,13 @@ All notable changes to this project will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project attempts to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.3.0](https://github.com/engineervix/ubuntu-server-backup/compare/v0.2.0...v0.3.0) (2021-12-11)
+
+
+### 🚀 Features
+
+* **specify-`days`-in-`config.toml`-&-compress-each-directory-in-the-`[extra]`-section:** also add a bunch of TODOs! ([077eb30](https://github.com/engineervix/ubuntu-server-backup/commit/077eb30965fe2c1309a9610bec6d3aa11f6963ca))
+
 ## [v0.2.0](https://github.com/engineervix/ubuntu-server-backup/compare/v0.1.1...v0.2.0) (2021-12-11)
 
 
