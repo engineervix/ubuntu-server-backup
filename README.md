@@ -96,7 +96,7 @@ This has been **tested on Ubuntu 20.04**, I don't know if it'll work correctly o
 - [ ] do *incremental* backups using [duplicity](https://duplicity.gitlab.io/duplicity-web/index.html)
 - [ ] Backup any additional custom Python virtual environment configs (virtualenvwrapper)
 - [ ] Include other *dotfiles* (such as `~/.profile`, etc.)
-- [ ] add email/SMS/telegram/slack notifications on failure (actually, just use <https://healthchecks.io/>)
+- [X] ~~add email/SMS/telegram/slack notifications on failure (actually, just use <https://healthchecks.io/>)~~ Yep, [healthchecks.io](https://healthchecks.io/) is best suited for this. You can use any of the choice of integrations available. I use [pushover](https://pushover.net/).
 - [ ] split each backup task into a standalone function
 - [ ] run automated tests using [Bash Automated Testing System](https://github.com/bats-core/bats-core)
 
