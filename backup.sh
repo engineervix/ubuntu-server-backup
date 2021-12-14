@@ -300,5 +300,8 @@ find "${backup_dir}" -mtime +"${days}" -type f -name "backup_*.log" -delete
 ### delete the configs directory
 rm -rv "${backup_dir:?}/${config_dir:?}"
 
+### somehow, root takes over ownership of rclone.conf (and other files)
+sudo chown "${user}:${user}" "/home/${user}/.config/rclone/rclone.conf"
+
 ## cron example (run daily at 3:18AM), with redirection of output to timestamped logfile
 # 18 3 * * * /path/to/backup.sh >> /path/to/backup_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1
