@@ -4,6 +4,24 @@ All notable changes to this project will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project attempts to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.3.0](https://github.com/engineervix/ubuntu-server-backup/compare/v0.2.0...v0.3.0) (2021-12-25)
+
+
+### 📝 Docs
+
+* no need to worry about notifying on failure ([2f33b48](https://github.com/engineervix/ubuntu-server-backup/commit/2f33b485bf2741eacc9e90b93b9586969c2cb559))
+
+
+### 🐛 Bug Fixes
+
+* ensure that `rclone.conf` ownership is preserved ([e9afc28](https://github.com/engineervix/ubuntu-server-backup/commit/e9afc28ef10c152c7bcc9d6a9d129d2ac3b9c475))
+
+
+### 🚀 Features
+
+* include backup of MongoDB databases ([ff37ce1](https://github.com/engineervix/ubuntu-server-backup/commit/ff37ce155d5f2cd4543cfc1915dc6c094caad19d))
+* specify `days` in `config.toml` & compress each directory in the `[extra]` section ([e68bde2](https://github.com/engineervix/ubuntu-server-backup/commit/e68bde2071a0755b379b14723381fddfe69c8431))
+
 ## [v0.3.0](https://github.com/engineervix/ubuntu-server-backup/compare/v0.2.0...v0.3.0) (2021-12-11)
 
 
