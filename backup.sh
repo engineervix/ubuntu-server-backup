@@ -125,6 +125,17 @@ for db in $(sudo -u postgres psql -t -c "select datname from pg_database where n
   fi
 done
 
+### MongoDB
+# based on https://www.digitalocean.com/community/tutorials/how-to-back-up-restore-and-migrate-a-mongodb-database-on-ubuntu-20-04
+# the default server setup doesn't have mongodb installed by default, so we first check
+if [ "$(dpkg-query -W -f='${Status}' mongodb-org 2>/dev/null | grep -c "ok installed")" -eq 1 ];
+then
+  # First create that directory /var/backups/mongobackups:
+  mkdir -p /var/backups/mongobackups
+  # Then run mongodump:
+  mongodump --out /var/backups/mongobackups/"${timestamp}"
+fi
+
 ### redis
 mkdir -p "${backup_dir}/${config_dir}"/dotfiles/
 cp -v /etc/redis/redis.conf "${backup_dir}/${config_dir}"/dotfiles/redis.conf
@@ -161,11 +172,11 @@ done
 
 ### Celery
 if [ -z "$(ls -A /etc/conf.d/)" ]; then
-   echo "Looks like there's no celery project on this machine"
+  echo "Looks like there's no celery project on this machine"
 else
-    mkdir -p "${backup_dir}/${config_dir}"/celery/{conf.d,systemd}
-    cp -v /etc/conf.d/* "${backup_dir}/${config_dir}/celery/conf.d/"
-    cp -v /etc/systemd/system/celery* "${backup_dir}/${config_dir}/celery/systemd/"
+  mkdir -p "${backup_dir}/${config_dir}"/celery/{conf.d,systemd}
+  cp -v /etc/conf.d/* "${backup_dir}/${config_dir}/celery/conf.d/"
+  cp -v /etc/systemd/system/celery* "${backup_dir}/${config_dir}/celery/systemd/"
 fi
 
 ### dotfiles
@@ -253,6 +264,10 @@ cp -v /etc/systemd/system/uwsgi.service "${backup_dir}/${config_dir}"/uwsgi/uwsg
 rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${backup_dir}/${files_dir}/" "${remote}:${machine}/${files_dir}/"
 rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${backup_dir}/${db_dir}/" "${remote}:${machine}/${db_dir}/"
 rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${backup_dir}/${config_dir}/" "${remote}:${machine}/${config_dir}/"
+if [ "$(dpkg-query -W -f='${Status}' mongodb-org 2>/dev/null | grep -c "ok installed")" -eq 1 ];
+then
+  rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" /var/backups/mongobackups/ "${remote}:${machine}/MongoDB/"
+fi
 
 ### then, the backup file + accompanying config
 rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${SCRIPT_DIR}/${SCRIPT}" "${remote}":"${machine}"
@@ -282,17 +297,21 @@ else
         --exclude='*.pyc'\
         --exclude='*.pyo'\
         --exclude='*~'\
-        -cv "${extra}" | xz -3e > "${backup_dir}/additional_backups/${directory}/${directory}_${timestamp}".tar.xz    
+        -cv "${extra}" | xz -3e > "${backup_dir}/additional_backups/${directory}/${directory}_${timestamp}".tar.xz
   done
   rclone sync --progress --config "/home/${user}/.config/rclone/rclone.conf" "${backup_dir}/additional_backups/" "${remote}":"${machine}"/additional_backups/
 fi
 
 ## 05. cleanup
 
-### delete backups older than 10 days
+### delete backups older than specified No. of days
 find "${backup_dir}/${files_dir}/" -mtime +"${days}" -type f -delete
 find "${backup_dir}/${db_dir}/" -mtime +"${days}" -type f -delete
 find "${backup_dir}/additional_backups/" -mtime +"${days}" -type f -delete
+if [ "$(dpkg-query -W -f='${Status}' mongodb-org 2>/dev/null | grep -c "ok installed")" -eq 1 ];
+then
+  find /var/backups/mongobackups/ -mtime +"${days}" -exec rm -rf {} \;
+fi
 
 ### delete backup logs older than specified No. of days
 find "${backup_dir}" -mtime +"${days}" -type f -name "backup_*.log" -delete

@@ -43,7 +43,7 @@ This is a custom backup script to automate the process of backing up databases, 
 - automatically deletes backups older than the number of days you specify in `config.toml`
 - backs up the following:
   - all your project files
-  - all PostgreSQL databases
+  - all PostgreSQL databases (and MongoDB databases if the [official `mongodb-org` package](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#official-mongodb-packages) is installed)
   - redis data & configuration
   - list of installed `apt` and `snap` packages
   - list of globally installed `python3` packages
